@@ -220,7 +220,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
-    this.getPortada(this.value);
+   
     var data = {
       fecha: this.fecha,
       nivel: this.nivel,

@@ -151,7 +151,6 @@ export default {
         var data = re.data;
         var result = data.result;
         this.mensualidades = result;
-        console.log("MENSUALIDADES",   this.mensualidades)
       });
     },
   },
@@ -159,7 +158,6 @@ export default {
   watch: {
     data() {
       this.maxWidth = screen.width;
-      console.log(this.maxWidth);
     },
   },
 
