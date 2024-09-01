@@ -19,7 +19,7 @@
 
           <v-container v-for="(item, i) in carreras" :key="i" class="mt-5">
             <v-row  v-if="i % 2"   style="margin:0px; background: rgb(255, 255, 255); border-radius: 10px">
-              <v-col cols="12" md="6" class="px-0 py-0">
+              <v-col    :order="screenWidth >600 ? 'last' : 'first'" cols="12" md="6" class="px-0 py-0">
                 <div class="outer-div">
                 <div class="text-center">
                   <p class="title-carrera">
@@ -58,11 +58,11 @@
 
             <v-row
               v-else
-             
+              
               style="background: rgb(255, 255, 255); border-radius: 10px"
             >
 
-              <v-col cols="12" md="6" class="px-0 py-0">
+              <v-col cols="12" md="6" class="px-0 py-0"  :order="i%2 ?  'first' : 'last' ">
                 <v-img
                   height="550px"
                   :src="item.url"
@@ -121,6 +121,8 @@ export default {
   components: {},
 
   data: () => ({
+    screenWidth: window.innerWidth, // Ancho inicial de la pantalla
+    
     carreras: [
       /*{ id: 1, carrera: 'Perito Contador', grado: '1', abr: 'ro', descripcion: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, dignissimos ad! Harum recusandae beatae totam aspernatur ab neque enim error numquam ea. Maiores quia est obcaecati autem, expedita corrupti facilis', img: 'https://www.intellectus.edu.gt/blog/wp-content/uploads/2023/06/estudiar-perito-contador-510x339.jpg' },
         { id: 2, carrera: 'Finanzas', grado: '2', abr: 'do', descripcion: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, dignissimos ad! Harum recusandae beatae totam aspernatur ab neque enim error numquam ea. Maiores quia est obcaecati autem, expedita corrupti facilis', img: 'https://blog.uch.edu.pe/wp-content/uploads/2023/01/carrera-de-contabilidad-y-finanzas-uch-universidad-750x500.jpg' },
@@ -142,8 +144,18 @@ export default {
         alert(error);
       }
     },
+    updateScreenWidth() {
+      this.screenWidth = window.innerWidth;
+    }
   },
-
+  mounted() {
+    // Añadir un event listener para detectar cambios en el tamaño de la ventana
+    window.addEventListener('resize', this.updateScreenWidth);
+  },
+  beforeDestroy() {
+    // Remover el event listener cuando el componente sea destruido
+    window.removeEventListener('resize', this.updateScreenWidth);
+  },
   created() {
     this.getCarrerasAll();
   },

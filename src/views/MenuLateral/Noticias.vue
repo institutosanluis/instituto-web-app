@@ -235,7 +235,7 @@ export default {
 
   created() {
     this.maxHeight = screen.height;
-    this.getPortada(this.value);
+ //   this.getPortada(this.value);
     var data = {
       fecha: this.fecha,
       nivel: this.nivel,
