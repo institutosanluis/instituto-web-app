@@ -118,10 +118,7 @@ class api {
     }
 
 
-    //Trae las portadas
-    async getPortadas(type) {
-        return await url.get(`/api/informacion/portada/${type}`)
-    }
+
 
     //Trae las Eventos Actividades
     async getEventosActividades() {

@@ -74,7 +74,6 @@ export default {
     },
 
     getPortada(type) {
-      //  api.getPortadas(type).
 
       api.getPortada(type).then((re) => {
         var portada = re.data;

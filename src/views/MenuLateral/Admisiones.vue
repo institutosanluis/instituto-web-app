@@ -99,7 +99,7 @@ export default {
     },
 
     getPortada(type) {
-      api.getPortadas(type).then((re) => {
+      api.getPortada(type).then((re) => {
         var portada = re.data;
         this.portada = portada;
       });
