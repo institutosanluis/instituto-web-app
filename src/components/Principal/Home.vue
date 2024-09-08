@@ -7,7 +7,7 @@
     <div class="px-3">
       <Informacion></Informacion>
     </div>
-    <!-- FRANJA SUPERIOR-->
+    <!-- FRANJA SUPERIOR    #ffbb00 -->
 
     <div style="height: 100%; background: rgba(21, 200, 255, 0.9)">
       <div class="text-center pb-10 mt-1 px-3 pt-5">
@@ -97,5 +97,7 @@ this.getAnuncios();
 .info-establecimiento {
   background-color: white !important;
   border-radius: 10px;
+
+  color: rgba(255, 196, 0, 0.918)
 }
 </style>

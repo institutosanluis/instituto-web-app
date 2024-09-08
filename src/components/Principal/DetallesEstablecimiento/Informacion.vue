@@ -1,42 +1,43 @@
 <template>
   <div style="background: white">
-      <v-row>
-        <v-col cols="12" md="8">
-          <v-row>
-            <v-col cols="12" :md="item.maxcol" v-for="(item, i) in nosotros" :key="i">
-              <div class="px-5"
-                v-if="item.titulo.trim() == 'Visión' || item.titulo.trim() == 'Misión'"
+    <v-row>
+      <v-col cols="12" md="8">
+        <v-row>
+          <v-col cols="12" :md="item.maxcol" v-for="(item, i) in nosotros" :key="i">
+            <div
+              class="px-5"
+              v-if="item.titulo.trim() == 'Visión' || item.titulo.trim() == 'Misión'"
+            >
+              <p class="title text-center mb-5">
+                {{ item.titulo }}
+              </p>
+              <div v-if="item.titulo.trim() == 'Visión'">
+                <v-img class="rounded-xl" :src="item.url"> </v-img>
+              </div>
+              <p>{{ item.descripcion }}</p>
+              <div v-if="item.titulo.trim() == 'Misión'">
+                <v-img class="rounded-xl" :src="item.url"> </v-img>
+              </div>
+            </div>
+            <div v-else class="px-5">
+              <p
+                class="quienes-somos mb-8 text-center"
+                style="margin-bottom: 3px; padding-bottom: 0px"
               >
-                <p class="title text-center mb-5">
-                  {{ item.titulo }}
-                </p>
-                <div  v-if="item.titulo.trim() == 'Visión'" class="imagen-id-derecha">
-                  <img :src="item.url" />
-                </div>
-                <p>{{ item.descripcion }}</p>
-                <div class="imagen-id" v-if="item.titulo.trim() == 'Misión'">
-          <img :src="item.url" />
-        </div>
-              </div>
-              <div v-else class="px-5">
-                <p
-                  class="quienes-somos mb-8 text-center"
-                  style="margin-bottom: 3px; padding-bottom: 0px"
-                >
-                  {{ item.titulo }}
-                </p>
-                <p style="text-align: center; font-size: 14pt; font-style: oblique">
-                  {{ item.descripcion }}
-                </p>
-              </div>
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col v-if="nosotros.length>0" cols="12" md="4" class="pt-15 pb-15">
-          <br />
-          <v-img style="border-radius: 10px" :src="nosotros[0].url"></v-img>
-        </v-col>
-      </v-row>
+                {{ item.titulo }}
+              </p>
+              <p style="text-align: center; font-size: 14pt; font-style: oblique">
+                {{ item.descripcion }}
+              </p>
+            </div>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col v-if="nosotros.length > 0" cols="12" md="4" class="pt-15 pb-15">
+        <br />
+        <v-img style="border-radius: 10px" :src="nosotros[0].url"></v-img>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -69,16 +70,13 @@ export default {
         var data = re.data;
         var result = data.result;
         this.nosotros = result;
-
       });
-
     },
   },
 
   watch: {
     data() {
       this.maxWidth = screen.width;
-
     },
   },
 
@@ -140,8 +138,9 @@ div.reset {
   padding-left: 5px;
   padding-right: 5px;
   transition-duration: 3s;
-  line-height: 35px;
-  font-size: 3.5vh;
+ 
+  line-height: 1.2;
+  font-size: 2.8vh;
   font-weight: bolder;
 }
 
@@ -256,9 +255,36 @@ border: 0px dashed #000000;
     padding-left: 80px;
     padding-right: 80px;
 
-    line-height: 50px;
-    font-size: 7vh;
+   
+  line-height: 1.2;
+    font-size: 5vh;
     font-weight: bolder;
   }
+}
+
+
+
+.image-container {
+  position: relative;
+  width: 300px; /* Ajusta el tamaño */
+  height: 300px; /* Ajusta el tamaño */
+}
+
+.marco {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.imagen-superpuesta {
+  width: 80%; /* Ajusta el tamaño de la imagen superpuesta */
+  height: auto;
+  position: absolute;
+  top: 10%; /* Ajusta la posición */
+  left: 10%;
+  z-index: 2;
 }
 </style>

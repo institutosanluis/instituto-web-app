@@ -17,30 +17,12 @@
         <v-col v-for="item in niveles" :key="item.id" cols="12">
           <div v-if="item.titulo.trim() == 'Básico'" class="nivel-basico py-3">
             <v-row>
-              <v-col
-                :order=" width < 600 ? 'first': 'last'"
-                cols="12"
-                md="6"
-                style="padding-top: 0px; padding-bottom: 0px "
-              >
-                <v-img
-                style="object-fit: contain;"
-                  :class="
-                    width > 600
-                      ? 'white--text align-end fade-image'
-                      : ' white--text align-end fade-image '
-                  "
-                  :src="item.url"
-                  height="450px"
-                >
-                </v-img>
-              </v-col>
-              <v-col cols="12" md="6" class="text-center"  :order=" width < 600 ? 'last' : 'first'"  >
+              <v-col cols="12" md="6" class="text-center">
                 <div class="centered-div">
                   <div>
                     <span class="nivel">
                       <p class="nive-title">Nivel</p>
-                      <p>{{ item.titulo }}</p></span
+                      <p style=" line-height: 1.2;">{{ item.titulo }}</p></span
                     >
 
                     <v-btn
@@ -54,42 +36,47 @@
                   </div>
                 </div>
               </v-col>
+              <v-col cols="12" md="6" style="padding-top: 0px; padding-bottom: 0px">
+                <v-img
+                  :class="
+                    width > 600
+                      ? 'white--text align-end fade-image'
+                      : ' white--text align-end fade-image '
+                  "
+                  :src="item.url"
+                >
+                </v-img>
+              </v-col>
             </v-row>
           </div>
-          <div v-else class="nivel-diver ">
+          <div v-else class="nivel-diver">
             <v-row>
               <v-col
-                :order="width > 600 ?  'last' :  'first'"
+                :order="width > 600 ? 'first' : 'last'"
                 cols="12"
                 md="6"
                 style="padding-top: 0px; padding-bottom: 0px"
               >
                 <v-img
-                  style="object-fit: contain;"
-                  :class="width <960 ?  'white--text align-end' : 'white--text align-end' "
+                  :class="width < 960 ? 'white--text align-end' : 'white--text align-end'"
                   :src="item.url"
-                  height="450px"
                 >
                 </v-img>
               </v-col>
-              <v-col
-                cols="12"
-                md="6"
-                class="text-center"
-                :order="width > 960 ? 'last' : 'first'"
-              >
+              <v-col cols="12" md="6" class="text-center">
                 <div class="centered-div">
                   <div>
                     <span class="nivel">
                       <p class="nive-title">Nivel</p>
-                      <p style="padding: 0px">{{ item.titulo }}</p></span
+                      <p style="padding: 0px;  line-height: 1.2;">{{ item.titulo }}</p></span
                     >
                     <v-btn
                       class="font-weight-black"
                       outlined
                       style="margin-top: -25%"
                       color="white"
-                      large  @click="navegarNivel(item.titulo.trim())"
+                      large
+                      @click="navegarNivel(item.titulo.trim())"
                       >Ver Más</v-btn
                     >
                   </div>
@@ -124,7 +111,7 @@ export default {
 
   methods: {
     navegarNivel(item) {
-      console.log(" viene ", item)
+      console.log(" viene ", item);
       if (item == "Diversificado") {
         this.$router.push({ path: `/nivel=${item}/carreras` });
       }
@@ -133,8 +120,13 @@ export default {
     getNiveles() {
       api.getAllNiveles().then((re) => {
         var data = re.data;
-
+        var arr = data;
         this.niveles = data.result;
+        this.niveles.sort(function (a, b) {
+          return a.id - b.id;
+        });
+
+        //  arr.forEach( function( val ) { tmp[val.id] = val; } );
       });
     },
     updateWidth() {
@@ -159,11 +151,11 @@ export default {
   border-top-left-radius: 50px;
 }
 .nivel-diver {
-  background: #ffbb00;
+  /* background: #ffbb00;*/
 }
 
 .nivel-basico {
-  background: rgb(238, 234, 13);
+  /* background: rgb(238, 234, 13);*/
 }
 .nivel {
   font-size: calc(3em + 1vw);
@@ -174,10 +166,11 @@ export default {
 .nive-title {
   font-size: 20pt;
   margin-bottom: 0pt;
+  line-height: 1.2;
 }
 
 .title-niveles {
-  font-size: 24pt;
+  font-size: 22pt;
   font-weight: bolder;
   color: white;
 }
@@ -267,14 +260,12 @@ export default {
     border-top-right-radius: 70px !important;
     border-bottom-right-radius: 70px !important;
   }
-
 }
 @media screen and (min-width: 550px) {
-
   .title-niveles {
-    font-size: 6vh;
+  
     font-weight: bolder;
-    font-size: calc(3em + 1vw);
+    font-size: calc(3em + 0.5vw);
   }
 
   .nivel {
@@ -285,6 +276,7 @@ export default {
 
   .nive-title {
     margin-bottom: 0px;
+    line-height: 1.2;
     font-size: 20pt !important;
   }
 }

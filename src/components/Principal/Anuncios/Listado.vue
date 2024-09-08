@@ -1,5 +1,5 @@
 <template>
-  <v-carousel
+  <v-carousel :class="maxWidth < 600 ? 'mb-8' : ''"
     cycle
     interval="9000"
     delimiter-icon="mdi-minus"
@@ -25,9 +25,9 @@
         </v-col>
       </v-row>
       <v-row justify="center" v-else>
-        <v-col cols="5">
+        <v-col cols="12" md="5">
           <v-card>
-            <v-img height="250" :src="item.url" class="d-block"> </v-img>
+            <v-img :height="maxWidth < 600  ? 200 : 250" :src="item.url" class="d-block"> </v-img>
           </v-card>
         </v-col>
       </v-row>
