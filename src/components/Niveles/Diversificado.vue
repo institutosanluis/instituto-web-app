@@ -19,10 +19,10 @@
 
           <v-container v-for="(item, i) in carreras" :key="i" class="mt-5">
             <v-row  v-if="i % 2"   style="margin:0px; background: rgb(255, 255, 255); border-radius: 10px">
-              <v-col    :order="screenWidth >600 ? 'last' : 'first'" cols="12" md="6" class="px-0 py-0">
+              <v-col    :order="screenWidth >600 ? 'last' : 'first'" cols="12" md="6" class="px-3 py-0">
                 <div class="outer-div">
                 <div class="text-center">
-                  <p class="title-carrera">
+                  <p class="title-carrera mt-md-3 mt-3">
                     {{ item.titulo }}
                     <br v-if="item.orientacion != ''" />
                     {{
@@ -34,7 +34,7 @@
                     <span style="color: gray">({{ item.anios }} años)</span>
                   </p>
 
-                  <span>{{ item.descripcion }}</span>
+                  <p class="text-justify">{{ item.descripcion }}</p>
 
                   <br />
                   <br />
@@ -52,7 +52,7 @@
             </div>
               </v-col>
               <v-col cols="12" md="6" class="px-0 py-0">
-                <v-img height="550px" :src="item.url" style="border-radius: 10px"></v-img>
+                <v-img max-height="570px" :src="item.url" style="border-radius: 10px"></v-img>
               </v-col>
             </v-row>
 
@@ -62,19 +62,19 @@
               style="background: rgb(255, 255, 255); border-radius: 10px"
             >
 
-              <v-col cols="12" md="6" class="px-0 py-0"  :order="i%2 ?  'first' : 'last' ">
+              <v-col cols="12" md="6" class="px-3 py-0"  :order="i%2 ?  'first' : 'last' ">
                 <v-img
-                  height="550px"
+                  max-height="570px"
                   :src="item.url"
                   style="border-radius: 10px; object-fit: cover"
                 ></v-img>
               </v-col>
-              <v-col cols="12" md="6" class="px-0 py-0">
+              <v-col cols="12" md="6" class="px-3 py-0">
                 <div class="outer-div">
 
                 <div class="text-center">
                     <p
-                  class="title-carrera title-center"
+                  class="title-carrera title-center mt-md-3 mt-3"
                  
                 >
                   {{ item.titulo }} <br v-if="item.orientacion != ''" />
@@ -86,7 +86,7 @@
                   <br />
                   <span style="color: gray">({{ item.anios }} años)</span>
                 </p>
-                  <span>{{ item.descripcion }}</span>
+                  <p class="text-justify">{{ item.descripcion }}</p>
 
                   <br />
                   <br />
@@ -139,6 +139,10 @@ export default {
         api.allCarreras().then((re) => {
           var data = re.data;
           this.carreras = data.result;
+
+          this.carreras.sort(function (a, b) {
+          return a.id - b.id;
+        });
         });
       } catch (error) {
         alert(error);

@@ -30,7 +30,7 @@
           </v-col>
           <v-col cols="3"></v-col>
           <v-col cols="12" md="6">
-            <v-img height="450" :src="carrera.url" style="border-radius: 10px"></v-img>
+            <v-img max-height="570" :src="carrera.url" style="border-radius: 10px"></v-img>
           </v-col>
           <v-col cols="3"></v-col>
         </v-row>
@@ -96,6 +96,11 @@ export default {
         var array = data.result;
         if(array.length !=0 ){
           this.grados = data.result;
+
+          
+          this.grados.sort(function (a, b) {
+          return a.id - b.id;
+        });
         this.listCursos(this.grados[0].idcarrera)
         }
       });
@@ -117,6 +122,10 @@ export default {
         }
         
       }
+    
+      cursos.sort(function (a, b) {
+          return a.id - b.id;
+        });
       return cursos;
     },
     listCursos(carrera){
