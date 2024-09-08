@@ -16,6 +16,7 @@
       <v-row class="fill-height" align="center" justify="center">
         <v-col v-for="item in niveles" :key="item.id" cols="12">
           <div v-if="item.titulo.trim() == 'Básico'" class="nivel-basico py-3">
+         
             <v-row>
               <v-col cols="12" md="6" class="text-center">
                 <div class="centered-div">
