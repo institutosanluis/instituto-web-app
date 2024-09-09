@@ -4,7 +4,7 @@
       hide-delimiter-background
       hide-delimiters
       :show-arrows="false"
-      :height="maxWidth < 700 ? '370' : '720'"
+      :height="maxWidth < 700 ? '220' : '720'"
       delimiter-icon="mdi-minus"
     >
       <v-carousel-item :src="portada.url" class="cover-image-container">
@@ -14,7 +14,7 @@
                   
                     </v-img>
                 </div>-->
-        <span class="educacion" :style="{ padding: this.portada.padding, backgroundColor: this.portada.backgroundcolor,  color: this.portada.color }">{{portada.titulo}}</span>
+        <span v-if="value!='admisiones'" class="educacion" :style="{ padding: this.portada.padding, backgroundColor: this.portada.backgroundcolor,  color: this.portada.color }">{{portada.titulo}}</span>
 
         <!--<div
           class="dynamic-text"
