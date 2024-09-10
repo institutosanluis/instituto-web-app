@@ -24,10 +24,10 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row justify="center" v-else>
-        <v-col cols="12" md="5">
+      <v-row justify="center" v-else no-gutters>
+        <v-col cols="12" md="8" sm="5">
           <v-card>
-            <v-img :height="maxWidth < 600  ? 200 : 250" :src="item.url" class="d-block"> </v-img>
+            <v-img :height="maxWidth < 600  ? 125 : 250" :src="item.url" class="d-block"> </v-img>
           </v-card>
         </v-col>
       </v-row>

@@ -35,11 +35,11 @@
               height="250"
               :src="item.url"
             >
-              <div class="grado-description">
+              <!--<div class="grado-description">
 
                 <p class="nivel">{{ item.titulo }}</p>
                 <v-btn color="warning" rounded> PENSUM</v-btn>
-              </div>
+              </div>  -->
             </v-img>
             <!--<div class="px-5">
               <br />
