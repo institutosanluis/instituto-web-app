@@ -22,7 +22,7 @@
           <v-card>
             <v-img height="250" :src="item.url" class="d-block w-100"> </v-img>
           </v-card>
-        </v-col>
+        </v-col> 
       </v-row>
       <v-row justify="center" v-else no-gutters>
         <v-col cols="12" md="8" sm="5">
