@@ -1,66 +1,84 @@
 <template>
-  <div class="portada-principal">
-
+  <div>
     <Portada v-model="typePortada"></Portada>
     <div class="detalle-jornadas py-5 px-10"></div>
 
     <br />
 
-    <v-container class="text-center">
-      <h1 class="my-10">REQUISITOS</h1>
+    <v-container>
+      <h1 class="my-10 text-center">REQUISITOS</h1>
       <v-row>
         <v-col
           cols="12"
-          md="6"
+          md="12"
           class="col-nivel"
           v-for="(item, i) in listaNiveles"
           :key="i"
         >
-          <div style="background: white; padding: 10px" class="py-5 rounded-lg">
-            <h1
-                    style="color: black"
-                    class="font-weight-bold text-md-h3 text-sm-h4"
-                  >
-                    {{ item.titulo }}
-                  </h1>
 
-            <!-- <div style="width: 100%">
+        <v-card class="py-5">
+          <h1 style="color: black" class="font-weight-bold text-md-h3 text-sm-h4">
+            {{ item.titulo }}
+          </h1>
+
+          <!-- <div style="width: 100%">
               <div class="cajon-logo">
                 <img style="height: 265px" class="img-logo" :src="item.url" />
               </div>
             </div> -->
-            <div>
-              <p class="text-requisitos">
-                <v-icon size="35">mdi-list-box-outline</v-icon>Requisitos de Inscripción
-              </p>
-              <br />
-
-              <ul style="text-align: justify">
-                <li
-                  style="list-style: none"
-                  v-for="(req, i) in getRequisitos(item.idnivel)"
-                  :key="i"
-                >
-                  <v-icon>mdi-check</v-icon> {{ req.requerimiento }}
-                </li>
-              </ul>
-              <br>
-              <p class="text-requisitos">
-                <v-icon size="35">mdi-cash</v-icon>Mensualidad
-              </p>
-
-              <ul style="text-align: justify">
-                <li
-                  style="list-style: none"
-                  v-for="(req, i) in getMensualidad(item.idnivel)"
-                  :key="i"
-                >
-                   {{ req.mensaje}}   <p class="text-h3 font-weight-bold" > <v-icon size="40">mdi-alpha-q-circle</v-icon>{{ req.precio }}</p>
-                </li>
-              </ul>
-            </div>
+   
+            <p class="text-requisitos">
+              <v-icon size="35">mdi-list-box-outline</v-icon>Requisitos de Inscripción
+            </p>
             <br />
-          </div>
+
+            <ul style="text-align: justify; margin-left: 0px; padding-left: 0px;" class="px-5">
+              <li
+                style="list-style: none; margin-left: 0px; padding-left: 0px;"
+                v-for="(req, i) in getRequisitos(item.idnivel)"
+                :key="i"
+              >
+                <v-icon>mdi-check</v-icon> {{ req.requerimiento }}
+              </li>
+            </ul>
+            <br />
+            <p class="text-requisitos"><v-icon size="35">mdi-cash</v-icon>MENSUALIDAD</p>
+
+      
+              <v-row no-gutters justify="center">
+                <v-col
+                  style="background: rgb(25, 163, 255); color: white"
+                  cols="8"
+                  md="8"
+                  class="text-center"
+                >
+                  <p class="font-weight-bold text-md-h5 pt-3"> Grados</p>
+                </v-col>
+                <v-col
+                  style="background: rgb(25, 163, 255); color: white"
+                  cols="4"
+                  md="4"
+                  class="text-center pt-3"
+                >
+                  <p class="font-weight-bold text-md-h5">Mensual (Q.)</p>
+                </v-col>
+              </v-row>
+
+             
+                <v-row    v-for="(req, i) in getMensualidad(item.idnivel)"
+                :key="i">
+                  <v-col cols="8" md="8" class="px-5 text-left" >
+                    {{ req.mensaje }}
+                  </v-col>
+                  <v-col cols="4" md="4" class="text-center px-5" justify="center">
+                    <p class="text-h5 font-weight-bold">Q.{{ req.precio }}</p>
+                  </v-col>
+                </v-row>
+
+                <!--    {{ req.mensaje}}   <p class="text-h3 font-weight-bold" > <v-icon size="40">mdi-alpha-q-circle</v-icon>{{ req.precio }}</p>-->
+           
+          <br />
+        </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -242,7 +260,7 @@ export default {
 
 .text-requisitos {
   font-weight: bolder;
-  font-size: 16pt;
+  font-size: 18pt;
 }
 
 .educacion {
@@ -285,8 +303,6 @@ export default {
     }
   }
 }
-
-
 
 .carousel-item-portada {
 }

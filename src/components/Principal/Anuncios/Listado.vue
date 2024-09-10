@@ -1,11 +1,11 @@
 <template>
-  <v-carousel :class="maxWidth < 600 ? 'mb-8' : ''"
+  <v-carousel :class="maxWidth < 600 ? 'mb-8' : 'mb-8'"
     cycle
     interval="9000"
     delimiter-icon="mdi-minus"
     hide-delimiter-background
     hide-delimiters
-    :height="maxHeight > 600 ? 290 : 290"
+    :height="maxWidth < 600 ? 160 : 310"
     :show-arrows="false"
   >
     <v-carousel-item v-for="(item, i) in items" :key="i">
@@ -27,7 +27,7 @@
       <v-row justify="center" v-else no-gutters>
         <v-col cols="12" md="8" sm="5">
           <v-card>
-            <v-img :height="maxWidth < 600  ? 125 : 250" :src="item.url" class="d-block"> </v-img>
+            <v-img :height="maxWidth < 600  ? 158 : 305" :src="item.url" class="d-block"> </v-img>
           </v-card>
         </v-col>
       </v-row>
