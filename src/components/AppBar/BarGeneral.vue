@@ -94,7 +94,7 @@ export default {
 
       { text: "EVENTOS", to: "/eventos" },
       { text: "ADMISIONES", to: "/admisiones" },
-      { text: "CONCTACTO", to: "/contacto" },
+   /*   { text: "CONCTACTO", to: "/contacto" },*/
     ],
   }),
 

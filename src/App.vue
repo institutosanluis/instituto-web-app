@@ -37,10 +37,10 @@
       <v-card-text class="white--text pt-0">
       <v-row>
       <v-col cols="12" sm="4">
-     <v-icon>mdi-phone-classic</v-icon> 2222-2222
+     <v-icon>mdi-phone-classic</v-icon>(+502) 5993-4990
       </v-col>
       <v-col cols="12" sm="4">
-        <v-icon>mdi-email</v-icon> correoestablecimiento@gmail.com
+        <v-icon>mdi-email</v-icon> imedsanluis@hotmail.com
     </v-col>
     <v-col cols="12" sm="4">
       <v-icon>mdi-directions-fork </v-icon>  Aldea San Luis, San Sebastián, Retalhuleu
@@ -51,7 +51,7 @@
       <v-divider></v-divider>
 
       <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} — <strong>GUATEMALA</strong>
+        {{ new Date().getFullYear() }} — <strong>San Sebastián, Retalhuleu, Guatemala</strong>
       </v-card-text>
     </v-card>
   </v-footer>
@@ -68,9 +68,9 @@ export default {
     //
     icons: [
         'mdi-facebook',
-        'mdi-twitter',
+       /* 'mdi-twitter',
        
-        'mdi-instagram',
+        'mdi-instagram',*/
       ],
     overlay: false,
   }),

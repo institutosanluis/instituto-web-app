@@ -74,8 +74,6 @@ export default {
       api.allGrados().then((re) => {
         var data = re.data;
         this.basico = data.result;
-
-        console.log("R -", this.basico);
       });
     },
   },

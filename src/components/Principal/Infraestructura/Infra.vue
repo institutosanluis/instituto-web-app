@@ -57,6 +57,11 @@ export default {
         api.allInfraestructura().then((re)=>{
             var data = re.data;
             this.contamos = data.result;
+
+            
+          this.contamos.sort(function (a, b) {
+            return a.id - b.id;
+          });
         })
 
      /* api.getContamosCon().then((re) => {
