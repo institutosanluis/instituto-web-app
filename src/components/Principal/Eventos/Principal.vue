@@ -92,7 +92,10 @@ export default {
                 for (let i in data) {
                     this.eventos.push(data[i])
                 }
-
+            
+               /* this.eventos.sort(function (a, b) {
+            return a.id - b.id;
+          }); */
                 this.eventos = this.eventos.reverse()
             })
         },
