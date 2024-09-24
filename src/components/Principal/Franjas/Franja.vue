@@ -67,6 +67,7 @@ export default {
   },
 
   beforeDestroy() {
+    this.getInfra();
     window.removeEventListener("resize", this.onResize);
   },
 

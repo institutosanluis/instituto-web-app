@@ -81,6 +81,9 @@ export default {
         })
     }
   },
+  beforeDestroy(){
+    this.getAnuncios();
+  },
   created(){
 this.getAnuncios();
   }

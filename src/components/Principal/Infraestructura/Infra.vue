@@ -95,6 +95,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
+    this.getContamosCon();
   },
   created() {
     this.maxHeight = screen.height;

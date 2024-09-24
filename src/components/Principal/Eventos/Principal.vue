@@ -128,6 +128,9 @@ export default {
     },
 
     beforeDestroy() {
+        this.getPortada(this.value);
+        this.getEventosActividades();
+        this.getNoticias();
         window.removeEventListener("resize", this.onResize);
     },
 

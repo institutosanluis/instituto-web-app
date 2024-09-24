@@ -134,6 +134,10 @@ export default {
       this.width = window.innerWidth;
     },
   },
+  beforeDestroy(){
+    window.addEventListener("resize", this.updateWidth);
+    this.getNiveles();
+  },
   created() {
     window.addEventListener("resize", this.updateWidth);
     this.getNiveles();

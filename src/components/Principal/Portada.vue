@@ -110,6 +110,7 @@ export default {
   },
 
   beforeDestroy() {
+    this.getPortada(this.value);
     window.removeEventListener("resize", this.onResize);
   },
 

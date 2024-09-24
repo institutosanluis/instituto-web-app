@@ -89,6 +89,7 @@ export default {
   },
 
   beforeDestroy() {
+    this.getVMEstablecimiento();
     window.removeEventListener("resize", this.onResize);
   },
 

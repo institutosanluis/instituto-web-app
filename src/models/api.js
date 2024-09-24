@@ -1,7 +1,7 @@
 import axios from "axios"
 
  const axiosInstance = axios.create({ 
-    baseURL: 'https://serverinsituto.onrender.com/'  /*'https://serverinsituto.onrender.com' */ ,// 'https://instituto-4b04a6f72af3.herokuapp.com/', // 'http://localhost:3000/', // 'https://instituto-4b04a6f72af3.herokuapp.com/',      /*  'http://localhost:3000/',*/
+    baseURL:'http://localhost:3000/'   /*'https://serverinsituto.onrender.com' */ ,// 'https://instituto-4b04a6f72af3.herokuapp.com/', // 'http://localhost:3000/', // 'https://instituto-4b04a6f72af3.herokuapp.com/',      /*  'http://localhost:3000/',*/
     //timeout: 100000, // Tiempo máximo de espera para una solicitud (opcional)
     headers: {
         "Content-Type": "application/json",

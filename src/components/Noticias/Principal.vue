@@ -1,79 +1,72 @@
 <template>
   <div>
-    <v-card v-for="(item, i) in noticias" :key="i" class="mx-auto my-5 rounded-xl">
-      <!-- Si el array tiene solo una imagen, mostrarla en una columna -->
+    <div v-if="noticias.length == 0">
+      <v-card cols="12" v-for="(item, i) of [0, 1, 2, 3]" :key="i" class="mx-auto my-5 rounded-xl">
+        <v-row no-gutters>
+          <v-col cols="12">
+            <v-skeleton-loader
+              class="mx-auto"
+              
+              type="card"
+            ></v-skeleton-loader>
+          </v-col>
+        </v-row>
+      </v-card>
+    </div>
 
-      <v-row
-        no-gutters
-        v-if="item.galeria.length === 1"
-        class="justify-center"
-        style="margin: 0px"
-      >
-        <v-col cols="12" class="px-3 pt-3">
-          <p>
-            <v-icon>mdi-earth</v-icon>
-            <span style="font-size: 12px">
-              {{ formatFecha(item.fechahora) }} - {{ formatHora(item.fechahora) }}</span
-            >
-          </p>
-          <p class="font-weight-medium">{{ item.publicacion }}</p>
-        </v-col>
-        <v-col cols="12" class="d-flex justify-center">
-          <div style="width: 100%; height: 550px">
-            <v-img
-              @click="verFotosDialog(item.galeria)"
-              style="width: 100vh; height: 100%"
-              :src="item.galeria[0].url"
-            ></v-img>
-          </div>
-        </v-col>
-        <v-col cols="12">
-          <v-btn color="white" block><v-icon>mdi-share</v-icon></v-btn>
-        </v-col>
-      </v-row>
+    <div v-else>
+      <v-card v-for="(item, i) in noticias" :key="i" class="mx-auto my-5 rounded-xl">
+        <v-row no-gutters>
+          <v-col cols="12" class="pt-3">
+            <div class="px-3">
+              <p>
+                <v-icon>mdi-earth</v-icon>
+                <span style="font-size: 12px">
+                  {{ formatFecha(item.fechahora) }} -
+                  {{ formatHora(item.fechahora) }}</span
+                >
+              </p>
+              <p class="font-weight-medium">{{ item.publicacion }}</p>
+            </div>
+          </v-col>
+          <v-col cols="12">
+            <div class="gallery" :class="'gallery-' + item.galeria.length">
+              <v-row no-gutters dense>
+                <v-col
+                  v-for="(media, index) in item.galeria"
+                  :key="index"
+                  :cols="getCols(item.galeria.length, index)"
+                >
+                  <v-img
+                    v-if="extractedText(media.tipo) == 'image/'"
+                    @click="verFotosDialog(item.galeria)"
+                    :src="media.url"
+                    class="gallery-item"
+                    max-height="300"
+                    contain
+                  ></v-img>
 
-      <!-- Si el array tiene más de una imagen, mostrar dos columnas -->
-      <v-row no-gutters v-else class="justify-center">
-        <v-col cols="12" class="px-3 pt-3">
-          <p>
-            <v-icon>mdi-earth</v-icon>
-            <span style="font-size: 12px">
-              {{ formatFecha(item.fechahora) }} - {{ formatHora(item.fechahora) }}</span
-            >
-          </p>
-          <p class="font-weight-medium">{{ item.publicacion }}</p>
-        </v-col>
-        <v-col
-          v-for="(photo, i) in item.galeria"
-          :key="i"
-          cols="6"
-          class="d-flex justify-center"
-          style="border-radius: 15px !important"
-        >
-          <div style="width: 100%; height: 550px">
-            <v-img
-              @click="verFotosDialog(item.galeria)"
-              :gradient="i % 2 ? 'to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)' : ''"
-              style="width: 100vh; height: 100%"
-              :src="photo.url"
-            >
-              <!-- Texto centrado en la imagen -->
-              <div v-if="i % 2" class="centered-text">
-                <v-card-text class="text-h5 white--text">
-                  <v-btn outlined dark @click="verFotosDialog(item.galeria)"
-                  >Ver más</v-btn
+                  <div
+                    v-if="extractedText(media.tipo) == 'video/'"
+                    style="border-radius: 10px"
                   >
-                </v-card-text>
-              </div>
-            </v-img>
-          </div>
-        </v-col>
-        <v-col cols="12">
-          <v-btn color="white"  block><v-icon>mdi-share</v-icon></v-btn>
-        </v-col>
-      </v-row>
-    </v-card>
-
+                    <video controls :style="{ width: '100%', height: '100%' }">
+                      <source :src="media.url" type="video/mp4" />
+                      Tu navegador no soporta la reproducción de videos.
+                    </video>
+                  </div>
+                </v-col>
+              </v-row>
+            </div>
+          </v-col>
+          <v-col cols="12">
+            <v-btn color="white" class="rounded-0" block
+              ><v-icon>mdi-share</v-icon></v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-card>
+    </div>
     <fotos :galeria="galeria" :dialog.sync="isDialogVisible"></fotos>
   </div>
 </template>
@@ -89,11 +82,22 @@ export default {
     galeria: [],
   }),
   methods: {
-
     verFotosDialog(item) {
       this.galeria = [];
       this.isDialogVisible = true;
       this.galeria = item;
+    },
+    getCols(count, index) {
+      if (count === 1) return 12;
+      if (count === 2) return 6;
+      if (count === 3 && index === 0) return 12; // La primera imagen grande
+      if (count === 3 && index > 0) return 6; // Las dos siguientes más pequeñas
+      if (count === 4) return 6; // Dos filas de dos columnas
+      if (count >= 5 && index < 2) return 6; // Tres imágenes por fila
+      if (count >= 5 && index >= 2 && index < 5) return 4;
+    },
+    extractedText(tipo) {
+      return tipo.substring(0, 6); // Extrae "Este "
     },
     getAllNoticias() {
       try {
@@ -101,22 +105,9 @@ export default {
           var listado = [];
           var data = re.data;
           listado = data.result;
+          this.noticias = listado;
 
-          for (let item in listado) {
-            api.allGaleriaNoti(listado[item].id).then((res) => {
-              var galeria = res.data;
-              var photos = galeria.result;
-
-              this.noticias.push({
-                fechahora: listado[item].fechahora,
-                id: listado[item].id,
-                publicacion: listado[item].publicacion,
-                galeria: photos,
-              });
-
-              this.noticias.sort((a, b) => new Date(b.fechahora) - new Date(a.fechahora));
-            });
-          }
+          this.noticias.sort((a, b) => new Date(b.fechahora) - new Date(a.fechahora));
         });
       } catch (error) {
         alert("Error ocurrido, recarga nuevamente");
@@ -159,5 +150,10 @@ export default {
   width: 100%;
 
   text-align: center;
+}
+
+.gallery-item {
+  border-radius: 2px;
+  overflow: hidden;
 }
 </style>
